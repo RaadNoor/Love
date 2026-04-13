@@ -113,7 +113,7 @@ button:hover {
 <audio autoplay loop>
   <source src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav" type="audio/wav">
 </audio>
-
+  
 <div class="container" id="app"></div>
 
 <script>
@@ -141,12 +141,21 @@ function render() {
       <button class="no" id="noBtn">No</button>
     `;
 
-    const btn = document.getElementById("noBtn");
-    btn.addEventListener("mouseover", () => {
-      btn.style.position = "absolute";
-      btn.style.left = Math.random()*80 + "%";
-      btn.style.top = Math.random()*80 + "%";
-    });
+const btn = document.getElementById("noBtn");
+
+function moveButton() {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 100);
+
+  btn.style.transition = "0.25s ease";
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+  btn.style.position = "fixed";
+}
+
+btn.addEventListener("mouseenter", moveButton);
+btn.addEventListener("touchstart", moveButton);
+btn.addEventListener("click", moveButton);
   }
 
 if(step === 2){
