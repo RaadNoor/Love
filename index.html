@@ -149,21 +149,25 @@ function render() {
     });
   }
 
-  if(step === 2){
-    app.innerHTML = `
-      <h1>Will you go on a Pohela Boishakhi date with me? 🌸</h1>
-      <button class="yes" onclick="next()">Yes</button>
-      <button class="no" id="trickyNo">No</button>
-    `;
+if(step === 2){
+  app.innerHTML = `
+    <h1>Will you go on a Pohela Boishakhi date with me? 🌸</h1>
+    <button class="yes" onclick="next()">Yes</button>
+    <button class="no" id="trickyNo">No</button>
+  `;
 
-    const trickyNo = document.getElementById("trickyNo");
+  const trickyNo = document.getElementById("trickyNo");
 
-    trickyNo.addEventListener("mouseover", () => {
-      trickyNo.innerText = "Yes 😏";
-    });
+  trickyNo.addEventListener("mouseover", () => {
+    trickyNo.innerText = "Yes 😏";
+  });
 
-    trickyNo.addEventListener("click", next);
-  }
+  trickyNo.addEventListener("click", () => {
+    alert("Don't you mean yes? 😌");
+    next(); // move to final page anyway
+  });
+}
+  
 if(step === 3){
   app.innerHTML = `
     <h1>🎉 Congratulations! 🎉</h1>
