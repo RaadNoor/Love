@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<script>
+  function typeLetter(){
+  const text = "My love, you mean everything to me. I know I mess up sometimes, but my heart has always been yours. Thank you for staying, for loving me, and for being you. I promise to make our Pohela Boishakh date unforgettable ❤️";
+
+  let i = 0;
+  const speed = 50;
+
+  function typing(){
+    if(i < text.length){
+      document.getElementById("letter").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+
+  typing();
+}  </script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+
+<style>
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  color: white;
+}
+
+.container {
+  text-align: center;
+  background: rgba(255,255,255,0.15);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(20px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
+h1 { margin-bottom: 20px; }
+
+button {
+  padding: 12px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.yes {
+  background: white;
+  color: #ff4b7d;
+}
+
+.no {
+  background: #ff4b7d;
+  color: white;
+  position: relative;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  animation: float 5s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes float {
+  0% {transform: translateY(100vh);}
+  100% {transform: translateY(-10vh);}
+}
+
+/* Confetti */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: white;
+  animation: fall 3s linear infinite;
+}
+
+@keyframes fall {
+  0% {transform: translateY(-10vh) rotate(0);}
+  100% {transform: translateY(100vh) rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+  <source src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav" type="audio/wav">
+</audio>
+
+<div class="container" id="app"></div>
+
+<script>
+let step = 0;
+const name = "My Love ❤️"; // 🔥 CHANGE HER NAME HERE
+
+const app = document.getElementById("app");
+
+function render() {
+  app.style.animation = "fadeIn 0.6s";
+
+  if(step === 0){
+    app.innerHTML = `
+      <h1>Tanjin, ${name}, I am sorry 😔</h1>
+      <p>Please forgive me</p>
+      <button class="yes" onclick="next()">Okay I forgive you</button>
+      <button class="no" onclick="please()">No</button>
+    `;
+  }
+
+  if(step === 1){
+    app.innerHTML = `
+      <h1>I love you baby ❤️</h1>
+      <button class="yes" onclick="next()">I love you too</button>
+      <button class="no" id="noBtn">No</button>
+    `;
+
+    const btn = document.getElementById("noBtn");
+    btn.addEventListener("mouseover", () => {
+      btn.style.position = "absolute";
+      btn.style.left = Math.random()*80 + "%";
+      btn.style.top = Math.random()*80 + "%";
+    });
+  }
+
+  if(step === 2){
+    app.innerHTML = `
+      <h1>Will you go on a Pohela Boishakhi date with me? 🌸</h1>
+      <button class="yes" onclick="next()">Yes</button>
+      <button class="no" id="trickyNo">No</button>
+    `;
+
+    const trickyNo = document.getElementById("trickyNo");
+
+    trickyNo.addEventListener("mouseover", () => {
+      trickyNo.innerText = "Yes 😏";
+    });
+
+    trickyNo.addEventListener("click", next);
+  }
+if(step === 3){
+  app.innerHTML = `
+    <h1>🎉 Congratulations! 🎉</h1>
+    <p>You have won a fine date with your man 💖</p>
+    <p id="letter" style="margin-top:20px; font-style:italic;"></p>
+  `;
+
+  createHearts();
+  createConfetti();
+  typeLetter();
+}
+}
+
+function next(){
+  step++;
+  render();
+}
+
+function please(){
+  alert("please baby? 🥺");
+}
+
+/* Hearts */
+function createHearts(){
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (Math.random()*20+10)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+  },300);
+}
+
+/* Confetti */
+function createConfetti(){
+  setInterval(() => {
+    const conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.style.left = Math.random()*100 + "vw";
+    conf.style.background = `hsl(${Math.random()*360},100%,50%)`;
+    document.body.appendChild(conf);
+    setTimeout(()=>conf.remove(),3000);
+  },100);
+}
+
+render();
+</script>
+
+</body>
+</html>
